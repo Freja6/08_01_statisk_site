@@ -1,0 +1,199 @@
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #f2f2f2;
+  color: #222;
+}
+
+main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* HEADER */
+.main_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 2rem;
+  background: white;
+  border-bottom: 1px solid #ddd;
+}
+
+.main_header h1 {
+  font-size: 2rem;
+}
+
+nav a {
+  margin-left: 1.5rem;
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+/* CATEGORY GRID */
+.category_list_container {
+  display: grid;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.category_list_container a {
+  background: hwb(35 26% 51%);
+  color: white;
+  text-decoration: none;
+  padding: 2rem;
+  text-align: center;
+  font-size: 1.2rem;
+  transition: 0.3s;
+}
+
+.category_list_container a:hover {
+  background: hwb(33 69% 11%);
+}
+
+@media (min-width: 700px) {
+  .category_list_container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* PRODUCT GRID */
+.product_list_container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-auto-rows: auto auto auto auto;
+  gap: 2rem;
+}
+
+.product_card {
+  display: grid;
+  grid-template-rows: subgrid;
+  grid-row: span 4;
+  background: #ffffff;
+  padding: 1rem;
+  position: relative;
+}
+
+.product_card img {
+  width: 100%;
+  height: auto;
+}
+
+/* PRODUCT CARD */
+.product_card {
+  background: hwb(45 72% 15%);
+  padding: 1rem;
+  position: relative;
+  transition: 0.3s;
+}
+
+.product_card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+.product_card img {
+  width: 100%;
+  height: auto;
+}
+
+.product_card h3 {
+  margin-top: 1rem;
+  font-size: 1rem;
+}
+
+.product_card p {
+  margin-top: 0.3rem;
+  font-size: 0.9rem;
+}
+
+.price {
+  margin-top: 0.5rem;
+  font-weight: bold;
+}
+
+/* SOLD OUT BADGE */
+.soldout {
+  opacity: 0.5;
+}
+
+.soldout::before {
+  content: "Sold Out";
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #888;
+  color: white;
+  padding: 5px 8px;
+  font-size: 0.8rem;
+}
+
+/* DISCOUNT BADGE */
+.discount_badge {
+  position: absolute;
+  bottom: 80px;
+  right: 10px;
+  background: red;
+  color: white;
+  padding: 5px 8px;
+  font-size: 0.8rem;
+}
+
+.old_price {
+  text-decoration: line-through;
+  color: grey;
+  font-size: 0.8rem;
+}
+
+.discount_price {
+  color: red;
+  font-weight: bold;
+}
+
+/* PRODUCT DETAIL */
+.product_detail {
+  display: grid;
+  gap: 3rem;
+  margin-top: 2rem;
+}
+
+@media (min-width: 900px) {
+  .product_detail {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.product_info h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+
+.product_info p {
+  margin-bottom: 0.8rem;
+}
+
+button {
+  padding: 12px 20px;
+  background: black;
+  color: white;
+  border: none;
+  cursor: pointer;
+  margin-top: 1rem;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: #444;
+}
