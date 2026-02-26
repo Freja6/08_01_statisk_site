@@ -1,9 +1,11 @@
-console.log(id);
+const params = new URLSearchParams(window.location.search);
+const id = params.get("id");
 
-// 1. Hent ID fra URL
-const urlParams = new URLSearchParams(window.location.search);
-const id = urlParams.get("id");
-
+if (!id) {
+  document.querySelector("main").innerHTML = "<h2>No product selected</h2>";
+} else {
+  fetchProduct();
+}
 // 2. Byg API URL
 const productURL = `https://kea-alt-del.dk/t7/api/products/${id}`;
 
