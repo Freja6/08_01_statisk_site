@@ -1,15 +1,15 @@
-// 1. Hent ID fra URL
 const params = new URLSearchParams(window.location.search);
-const id = params.get("id");
+const category = params.get("category");
 
-if (!id) {
-  document.querySelector("main").innerHTML = "<h2>No product selected</h2>";
-} else {
-  fetch(`https://kea-alt-del.dk/t7/api/products/${id}`)
-    .then((response) => response.json())
-    .then((data) => showProduct(data));
+let url = "https://kea-alt-del.dk/t7/api/products";
+
+if (category) {
+  url = `https://kea-alt-del.dk/t7/api/products?category=${category}`;
 }
 
+fetch(url)
+  .then((response) => response.json())
+  .then((data) => showProducts(data));
 // 2. Vis produktet
 function showProduct(product) {
   document.querySelector(".product_name").textContent =
