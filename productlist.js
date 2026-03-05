@@ -1,3 +1,11 @@
+let allProducts = [];
+fetch(`https://kea-alt-del.dk/t7/api/products?category=${category}`)
+  .then((res) => res.json())
+  .then((data) => {
+    allProducts = data;
+
+    showProducts(data);
+  });
 const params = new URLSearchParams(window.location.search);
 const category = params.get("category");
 
@@ -19,14 +27,52 @@ function showProducts(products) {
 
   products.forEach((product) => {
     container.innerHTML += `
-      <article class="product_card">
+      <article class="product_card ${product.soldout ? "soldout" : ""}">
+
+        ${product.discount > 0 ? `<span class="discount_badge">-${product.discount}%</span>` : ""}
+
         <a href="productdetails.html?id=${product.id}">
-          <img src="https://kea-alt-del.dk/t7/images/webp/640/${product.id}.webp" alt="">
+          <img src="https://kea-alt-del.dk/t7/images/webp/640/${product.id}.webp">
+
           <h3>${product.productdisplayname}</h3>
-          <p>${product.brandname} | ${product.category}</p>
+
+          <p>${product.brandname}</p>
+
           <p>DKK ${product.price}</p>
+
         </a>
+
       </article>
     `;
   });
 }
+
+document.getElementById("allBtn").addEventListener("click", () => {
+  showProducts(allProducts);
+});
+
+document.getElementById("saleBtn").addEventListener("click", () => {
+  const filtered = allProducts.filter((product) => product.discount > 0);
+
+  showProducts(filtered);
+});
+
+document.getElementById("stockBtn").addEventListener("click", () => {
+  const filtered = allProducts.filter((product) => !product.soldout);
+
+  showProducts(filtered);
+});
+
+document.getElementById("sortSelect").addEventListener("change", (event) => {
+  let sorted = [...allProducts];
+
+  if (event.target.value === "priceAsc") {
+    sorted.sort((a, b) => a.price - b.price);
+  }
+
+  if (event.target.value === "priceDesc") {
+    sorted.sort((a, b) => b.price - a.price);
+  }
+
+  showProducts(sorted);
+});
